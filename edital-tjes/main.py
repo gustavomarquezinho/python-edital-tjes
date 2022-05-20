@@ -1,4 +1,5 @@
 from tkinter import Label
+from scripts.gui import *
 from scripts.config import *
 
 
@@ -80,7 +81,6 @@ def load_second_screen(types: str, delete=None):
             load_price_record(PROGRAM_NAME)
 
         case _:
-            from scripts.gui import show_message
             show_message('(Erro) Não existe nenhuma configuração disponível para esse tipo!')
             return False
 
