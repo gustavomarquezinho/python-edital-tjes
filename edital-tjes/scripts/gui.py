@@ -8,7 +8,7 @@ from main import PROGRAM_NAME
 
 
 from tkinter import (
-    BooleanVar, Tk, Text, StringVar, PhotoImage, END
+    Tk, Text, END, StringVar
 )
 
 from tkinter.ttk import (
@@ -33,15 +33,13 @@ class Interface(Tk):
         self.row = 0
 
         self.color = load_color_scheme()
-        self.default_var = BooleanVar(value=self.color)
-
         self.load_style(title, xsize, ysize)
 
         if layer != 0:
             self.protocol('WM_DELETE_WINDOW', \
                 lambda: show_message('Você realmente deseja sair do programa?', options=2, forms=self))
 
-        self.iconphoto(False, PhotoImage(file='./edital-tjes/assets/icon_small.png', master=self))
+        self.iconbitmap('./edital-tjes/assets/icon_small.ico')
 
     ######
 
@@ -147,7 +145,9 @@ class Interface(Tk):
     ######
 
     def create_switch(self, padx: tuple, pady: tuple) -> None:
-        switch = Checkbutton(self, text='Modo Escuro', variable=self.default_var, style='Switch.TCheckbutton', command=self.change_color)
+        color_mode = 'Modo Claro' if self.color else 'Modo Escuro'
+
+        switch = Checkbutton(self, text=color_mode, style='Switch.TCheckbutton', command=self.change_color)
         switch.grid(column=self.col, row=self.row, padx=padx, pady=pady)
 
         self.position(1)
